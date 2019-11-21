@@ -33,6 +33,10 @@ part*.stl
 *.log
 *.sql
 *.sqlite
+*.out
+*.err
+*.mat
+*.dat
 
 # OS generated files #
 ######################
