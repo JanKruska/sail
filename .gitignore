@@ -38,6 +38,11 @@ part*.stl
 *.mat
 *.dat
 
+# Generated figures #
+######################
+*.eps
+*.pdf
+
 # OS generated files #
 ######################
 .DS_Store

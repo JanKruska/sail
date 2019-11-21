@@ -1,0 +1,53 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+start=`date +%s`
+casePath=${0%/*}
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+runApplication surfaceFeatureExtract -case $casePath
+
+runApplication blockMesh -case $casePath
+
+runApplication decomposePar -case $casePath
+start_snappy=$(date +%s)
+runParallel snappyHexMesh -overwrite 
+end_snappy=$(date +%s)
+echo "SnappyHexMesh took $((end_snappy-start_snappy)) seconds to complete"
+# foamJob -parallel -screen snappyHexMesh
+
+meshTime=`date +%s` 
+echo "$((meshTime-start))" >> mesh.timing
+
+# #- For non-parallel running
+# cp -r 0.org 0 > /dev/null 2>&1
+
+#- For parallel running
+ls -d processor* | xargs -I {} rm -rf ./{}/0
+ls -d processor* | xargs -I {} cp -r 0.org ./{}/0
+
+cfdStart=`date +%s`
+
+runParallel patchSummary
+runParallel potentialFoam
+start_simple=$(date +%s)
+runParallel $(getApplication)
+end_simple=$(date +%s)
+echo "SimpleFoam took $((end_simple-start_simple)) seconds to complete"
+
+cfdEnd=`date +%s` 
+echo "$((cfdEnd-cfdStart))" >> cfd.timing
+
+runApplication reconstructParMesh -constant -case $casePath
+runApplication reconstructPar -latestTime -case $casePath
+
+end=`date +%s`
+echo "$((end-start))" >> all.timing
+
+# Return results
+cp postProcessing/forceCoeffs1/0/forceCoeffs.dat result.dat
+cp postProcessing/mirror/0/forces.dat forces.dat
+
+
+# ----------------------------------------------------------------- end-of-file

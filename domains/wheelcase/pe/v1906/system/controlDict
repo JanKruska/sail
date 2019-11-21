@@ -1,0 +1,90 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs
+(
+    "libOpenFOAM.so"
+    "libincompressibleTurbulenceModel.so"
+    "libincompressibleRASModels.so"
+);
+
+application     simpleFoam;
+
+startFrom       startTime;
+
+startTime       0.0;
+
+stopAt          endTime;
+
+endTime         200;
+
+deltaT          1; 
+
+writeControl    runTime; 
+
+writeInterval   200;  // 12.5 kHz
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+adjustTimeStep  no;
+
+maxCo           .5; 
+
+functions
+{
+    #include "readFields"
+    //#include "streamLines"
+    //#include "wallBoundedStreamLines"
+    #include "cuttingPlane"
+    #include "forceCoeffs"
+}
+
+//Added for force output.
+libs
+(
+    "libforces.so"
+);
+
+functions
+{
+    velo
+    {
+        patches             (veloGroup);
+        CofR                (0 0 0);
+        writeControl        timeStep;
+        writeInterval       1;
+        type                forces;
+        p                   p;
+        U                   U;
+        rho                 rhoInf;
+        rhoInf              1;
+        log                 true;
+    }
+}
+
