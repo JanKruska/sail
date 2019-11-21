@@ -17,7 +17,7 @@ parse.addOptional('caseStart', 1);
 parse.addOptional('config','config1');
 
 parse.parse(varargin{:});
-nCases   = parse.Results.nCases;
+d.nCases   = parse.Results.nCases;
 config = parse.Results.config;
 d.caseStart = parse.Results.caseStart;
 

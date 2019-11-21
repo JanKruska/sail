@@ -65,5 +65,5 @@ system(['touch ' openFoamFolder 'done.signal']);
 [err, out] = system(['(cd '   openFoamFolder '; ./Allclean)']);
 if(err~=0)
    disp(['ERROR in Allclean \n' out]); 
-else
+end
 
