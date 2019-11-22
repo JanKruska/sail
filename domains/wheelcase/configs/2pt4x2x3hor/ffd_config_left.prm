@@ -3,24 +3,27 @@
 
 # n control points indicates the number of control points in each direction (x, y, z).
 # For example, to create a 2 x 3 x 2 grid, use the following: n control points: 2, 3, 2
-n control points x: 3
+n control points x: 4
 n control points y: 2
-n control points z: 2
+n control points z: 3
 
 # box lenght indicates the length of the FFD bounding box along the three canonical directions (x, y, z).
 # It uses the local coordinate system.
 # For example to create a 2 x 1.5 x 3 meters box use the following: lenght box: 2.0, 1.5, 3.0
 box length x: 1110.0
 box length y: 200.0
-box length z: 500.0
+box length z: 495.0
 
 # box origin indicates the x, y, and z coordinates of the origin of the FFD bounding box. That is center of
 # rotation of the bounding box. It corresponds to the point coordinates with position [0][0][0].
 # See section "Parameters weights" for more details.
 # For example, if the origin is equal to 0., 0., 0., use the following: origin box: 0., 0., 0.
-box origin x: -800.0
-box origin y: 160.0
-box origin z: 0.0
+# -320.0
+# 185.0
+# 5.0
+box origin x: -790.0 
+box origin y: -390.0
+box origin z: 5.0
 
 # rotation angle indicates the rotation angle around the x, y, and z axis of the FFD bounding box in degrees.
 # The rotation is done with respect to the box origin.
@@ -59,16 +62,16 @@ parameter x: 0   0   0   0.0
 
 # parameter y collects the displacements along y, normalized with the box lenght y.
 parameter y: 0   0   0   0.0
-             0   0   1   0.0 #c 
-             0   1   0   0.0  
-             0   1   1   0.0 
-             1   0   0   0.0  
-             1   0   1   0.0 
+             0   0   1   0.0
+             0   1   0   0.0
+             0   1   1   0.0
+             1   0   0   0.0
+             1   0   1   0.0
              1   1   0   0.0
-             1   1   1   0.0 
-             2   0   0   0.0 
+             1   1   1   0.0
+             2   0   0   0.0
              2   0   1   0.0
-             2   1   0   0.0 
+             2   1   0   0.0
              2   1   1   0.0
 
 # parameter z collects the displacements along z, normalized with the box lenght z.
@@ -99,15 +102,15 @@ parameter z: 0   0   0   0.0
 # # For example to create a 2 x 1.5 x 3 meters box use the following: lenght box: 2.0, 1.5, 3.0
 # box length x: 1110.0
 # box length y: 200.0
-# box length z: 500.0
+# box length z: 495.0
 
 # # box origin indicates the x, y, and z coordinates of the origin of the FFD bounding box. That is center of
 # # rotation of the bounding box. It corresponds to the point coordinates with position [0][0][0].
 # # See section "Parameters weights" for more details.
 # # For example, if the origin is equal to 0., 0., 0., use the following: origin box: 0., 0., 0.
-# box origin x: -310.0
-# box origin y: -350.0
-# box origin z: 0.0
+# box origin x: -320.0
+# box origin y: 185.0
+# box origin z: 5.0
 
 # # rotation angle indicates the rotation angle around the x, y, and z axis of the FFD bounding box in degrees.
 # # The rotation is done with respect to the box origin.
@@ -149,7 +152,7 @@ parameter z: 0   0   0   0.0
 #              0   0   1   0.0
 #              0   1   0   0.0
 #              0   1   1   0.0
-#              1   0   0   -1.0
+#              1   0   0   1.0
 #              1   0   1   0.0
 #              1   1   0   0.0
 #              1   1   1   0.0
