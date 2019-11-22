@@ -33,14 +33,14 @@ function p = paramsGP(nInputs)
 
 %------------- BEGIN CODE --------------
 
-p.covfunc   = @covSEard;             
-p.hyp.cov   = [zeros(nInputs,1);0]; % (unit vector in log space)
+p.covfunc   = @covSEiso;             
+p.hyp.cov   = [log(0.5);0];%log(ell); log(sigma)
 
 p.meanfunc  = {@meanConst};  
-p.hyp.mean  = 0;
+p.hyp.mean  = 1;
 
 p.likfunc   = @likGauss;     
-p.hyp.lik   = log(0.1);
+p.hyp.lik   = log(5); % log(sigma)
 
 p.functionEvals = 100;      % function evals to optimize hyperparams
 

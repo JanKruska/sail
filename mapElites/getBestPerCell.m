@@ -32,10 +32,11 @@ feature = feval(d.categorize, samples, d);
 for iDim = 1:d.nDims
     bin(:,iDim) = discretize(feature(:,iDim),edges{iDim});
 end
-[sortedByFeatureAndFitness, indxSortOne] = sortrows([bin fitness]);
+bin = rmmissing([bin fitness]);
+[sortedByFeatureAndFitness, indxSortOne] = sortrows(bin);
 [~, indxSortTwo] = unique(sortedByFeatureAndFitness(:,[1 2]),'rows');
 
 bestIndex = indxSortOne(indxSortTwo);
-bestBin = bin(bestIndex,:);
+bestBin = bin(bestIndex,1:d.nDims);
 
 %------------- END OF CODE --------------

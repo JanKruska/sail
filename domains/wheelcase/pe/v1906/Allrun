@@ -13,8 +13,8 @@ module load gcc/default
 
 source ~/OpenFOAM-plus/etc/bashrc
 
-echo "Number of tasks: " 
-echo $SLURM_NTASKS
+#echo "Number of tasks: " 
+#echo $SLURM_NTASKS
 set -e #Exit if any command returns non-zero exit value
 
 start=`date +%s`
@@ -41,7 +41,7 @@ cp -r 0org 0
 
 
 runParallel patchSummary
-runParallel potentialFoam
+#runParallel potentialFoam
 runParallel $(getApplication)
 
 cfdEnd=`date +%s`

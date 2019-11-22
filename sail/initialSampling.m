@@ -40,6 +40,9 @@ nMissing = nInitialSamples; inds = []; sobPoint = 1;
 while nMissing > 0
     indPool = sobSequence(sobPoint:(sobPoint+nMissing*2),:);
     sobPoint = 1 + sobPoint + nMissing*2;
+    if(isfield(d,'sobolScale'))%Scale sobol sequence if needed
+        indPool = d.sobolScale(indPool);
+    end
     validFunction = @(genomes) feval(d.validate, genomes, d);
     [validInds,~,nMissing] = getValidInds(indPool, validFunction, nMissing);
     inds = [inds; validInds];     %#ok<AGROW>

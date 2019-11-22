@@ -9,7 +9,7 @@ function dragF = wheelcase_OpenFoamResult(x, stlFileName,openFoamFolder)
 %    openFoamFolder - OpenFOAM case folder
 %
 % Outputs:
-%    dragF  - [1X1] drag force result
+%    drag F  - [1X1] drag force result
 %
 %------------- BEGIN CODE --------------
 dragF = nan;
@@ -22,7 +22,7 @@ stlwrite(stlFileName, x);
 [err, out] = system(['(cd '   openFoamFolder '; ./Allrun)']);
 
 if(err~=0)
-   disp(['ERROR in Allrun \n' out]);
+   disp(['ERROR in Allrun' newline out]);
    save([openFoamFolder  'error' int2str(randi(100,1)) '.mat']);
 else
 	% Wait for results
@@ -64,6 +64,6 @@ end
 system(['touch ' openFoamFolder 'done.signal']);
 [err, out] = system(['(cd '   openFoamFolder '; ./Allclean)']);
 if(err~=0)
-   disp(['ERROR in Allclean \n' out]); 
+   disp(['ERROR in Allclean' newline out]); 
 end
-
+    

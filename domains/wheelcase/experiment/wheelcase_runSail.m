@@ -68,11 +68,12 @@ d = wheelcase_Domain(...
     'config',config);
 
 % Use Dummy Evaluation 
-% d.preciseEvaluate = 'wheelcase_DummyPreciseEvaluate';
+%d.preciseEvaluate = 'wheelcase_DummyPreciseEvaluate';
  
 %% Run SAIL
 runTime = tic;
 disp('Running SAIL')
+rmCaseFolders(d);
 makeCaseFolders(d);
 output = sail(p,d);
 rmCaseFolders(d);

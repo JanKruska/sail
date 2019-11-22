@@ -28,6 +28,8 @@ functionEvals = parse.Results.functionEvals;
 %------------- BEGIN CODE --------------
 GP_model.hyp = minimize(d.hyp,@gp, -functionEvals, @infExact, d.meanfunc, ...
                d.covfunc, d.likfunc, input, output);
+%GP_model.hyp.lik = max(GP_model.hyp.lik,0); %too small values can cause gp
+%to fail.can cause crashes when using dummy evaluation
 GP_model.trainInput = input;
 GP_model.trainOutput= output;
 GP_model.params     = d;
