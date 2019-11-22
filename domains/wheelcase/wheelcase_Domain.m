@@ -52,7 +52,7 @@ ffdPRight = makeFfdParameters(stl,['domains/wheelcase/configs/' config '/ffd_con
 d.express = @(x)wheelcase_Express(x,ffdPLeft,ffdPRight);
 d.base = stl.vertices;
 
-d.dof = 6;
+d.dof = getDof();
 
 % - Feature Space
 d.featureRes = [25 25];

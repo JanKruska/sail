@@ -23,7 +23,10 @@ stlwrite(stlFileName, x);
 
 if(err~=0)
    disp(['ERROR in Allrun' newline out]);
-   save([openFoamFolder  'error' int2str(randi(100,1)) '.mat']);
+   errorFolder = ['error' int2str(randi(100,1)) '/'];
+   system(['mkdir ' openFoamFolder errorFolder])
+   save([openFoamFolder errorFolder 'error.mat']);
+   system(['mv ' openFoamFolder 'log* ' openFoamFolder errorFolder]);
 else
 	% Wait for results
 	resultOutputFile = [openFoamFolder 'result.dat'];
@@ -33,7 +36,7 @@ else
 		pause(10);
 		if (toc > 300); dragF = nan; return; end;
 	end
-	display(['|----| Meshing done in ' seconds2human(toc)]);
+	%display(['|----| Meshing done in ' seconds2human(toc)]);
 
 	tic;
 	while ~exist([openFoamFolder 'all.timing'] ,'file')
