@@ -17,7 +17,7 @@ FoamFile
 
 convertToMeters 1;
 
-vertices
+vertices //TODO: correct vertces for escooter
 (
     (-5 -4 -1)
     (15 -4 -1)

@@ -96,16 +96,6 @@ castellatedMeshControls
             level 1;
         }
 
-        //{
-        //    file "top_turned.eMesh";
-        //    level 6;
-        //}
-
-        //{
-        //    file "velo_turned.eMesh";
-        //    level 6;
-        //}
-
     );
 
 
@@ -134,32 +124,6 @@ castellatedMeshControls
                 inGroups (veloGroup);
             }
         }
-         //veloMain
-         //{
-         //    // Surface-wise min and max refinement level
-         //    level (4 6);
-        
-         //    // Optional specification of patch type (default is wall). No
-         //    // constraint types (cyclic, symmetry) etc. are allowed.
-         //    patchInfo
-         //    {
-         //        type wall;
-         //        inGroups (veloGroup);
-         //    }
-         //}
-         //veloTop
-         //{
-         //    // Surface-wise min and max refinement level
-         //    level (4 6);
-        
-         //    // Optional specification of patch type (default is wall). No
-         //    // constraint types (cyclic, symmetry) etc. are allowed.
-         //    patchInfo
-         //    {
-         //        type wall;
-         //        inGroups (veloGroup);
-         //    }
-         //}
     }
 
     // Resolve sharp angles
@@ -183,32 +147,9 @@ castellatedMeshControls
     {
         allDef
         {
-            //mode inside;
-            //levels ((1E15 6));
             mode distance;
-            //levels ( (0.05 7) (0.1 6) (0.5 4) (1.0 2) );
-            //levels ( (0.03 8) (0.06 6) (0.1 5) (0.3 4) (2.0 2)); // levels must be ordered nearest first
-            //levels ( (0.1 6) (0.3 4) (2.0 2) );
-            //levels ( (0.1 6) (0.5 4) (1.0 1) );
-            //levels ( (0.1 4) (0.5 2) );
             levels ( (0.1 6) (0.5 4) (1.0 2) );
         }
-         //veloTop
-         //{
-         //    //mode inside;
-         //    //levels ((1E15 6));
-         //    mode distance;
-         //    //levels ( (0.03 8) (0.06 6) (0.1 5) (0.3 4) (2.0 2)); // levels must be ordered nearest first
-         //    levels ( (0.1 6) (0.3 4) (2.0 2) );
-         //}
-        //veloMain
-        //{
-        //    //mode inside;
-        //    //levels ((1E15 6));
-        //    mode distance;
-        //    //levels ( (0.03 8) (0.06 6) (0.1 5) (0.3 4) (2.0 2)); // levels must be ordered nearest first
-        //    levels ( (0.1 6) (0.3 4) (2.0 2) );
-        //}
     }
 
 
@@ -283,14 +224,6 @@ addLayersControls
         {
             nSurfaceLayers 1;
         }
-        //"(lowerWall|veloTop).*"
-        //{
-        //    nSurfaceLayers 1;
-        //}
-        //"(lowerWall|veloMain).*"
-        //{
-        //    nSurfaceLayers 1;
-        //}
     }
 
     // Expansion factor for layer mesh

@@ -24,7 +24,7 @@ forceCoeffs1
     rhoInf      1;           // Redundant for incompressible
     liftDir     (0 0 1);
     dragDir     (1 0 0);
-    CofR        (0.72 0 0);  // Axle midpoint on ground
+    CofR        (0.72 0 0);  // Axle midpoint on ground //TODO: Correct CofR for escooter
     pitchAxis   (0 1 0);
     magUInf     10;          // Inlet wind speed magnitude
     lRef        1;           // 
