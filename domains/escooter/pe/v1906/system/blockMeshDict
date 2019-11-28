@@ -15,19 +15,38 @@ FoamFile
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-convertToMeters 1;
+scale 1;
 
-vertices //TODO: correct vertces for escooter
+xmin -20;
+xmax 5;
+ymin -3;
+ymax 3;
+zmin -1;
+zmax 10;
+
+vertices
 (
-    (-5 -4 -1)
-    (15 -4 -1)
-    (15  4 -1)
-    (-5  4 -1)
-    (-5 -4 3.75)
-    (15 -4 3.75)
-    (15  4 3.75)
-    (-5  4 3.75)
+	($xmin $ymin $zmin) //0
+	($xmax $ymin $zmin) //1
+	($xmax $ymax $zmin) //2
+	($xmin $ymax $zmin) //3
+	($xmin $ymin $zmax) //4
+	($xmax $ymin $zmax) //5
+	($xmax $ymax $zmax) //6
+	($xmin $ymax $zmax) //7
 );
+
+//vertices //TODO: correct vertces for escooter
+//(
+//    (-5 -4 -1)
+//    (15 -4 -1)
+//    (15  4 -1)
+//    (-5  4 -1)
+//    (-5 -4 3.75)
+//    (15 -4 3.75)
+//    (15  4 3.75)
+//    (-5  4 3.75)
+//);
 
 blocks
 (
