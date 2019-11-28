@@ -4,10 +4,7 @@ function wheelcase_runSail(varargin)
 % Syntax:  [output1,output2] = function_name(input1,input2,input3)
 %
 
-% Author: Adam Gaier
-% Bonn-Rhein-Sieg University of Applied Sciences (BRSU)
-% email: adam.gaier@h-brs.de
-% Oct 2017; Last revision: 05-Oct-2017
+% Author: Jan Kruska
 
 %------------- BEGIN CODE --------------
 parse = inputParser;
@@ -28,7 +25,9 @@ id = getenv('SLURM_JOB_ID');
 disp([nCases caseStart]);
 
 %% Parallelization Settings
-%parpool(12);
+if batchStartupOptionUsed
+    parpool;
+end
 % Ensure Randomness of Randomness
 % RandStream.setGlobalStream(RandStream('mt19937ar','Seed','shuffle'));
 
@@ -89,12 +88,12 @@ predMap = createPredictionMap(...
             output.model{1}.trainInput,... % Initial solutions
             p,d,'featureRes',p.data.predMapRes);     % Hyperparameters
                
-save(['sail' int2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap');
+save(['sail' num2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap');
 
 foundDesigns = reshape(predMap.genes,[p.data.predMapRes(1)*p.data.predMapRes(2),6]);
 trueFit = feval(d.preciseEvaluate,foundDesigns,d);
 
-save(['sail' int2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap','trueFit');
+save(['sail' num2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap','trueFit');
 end
 
 %------------- END OF CODE --------------

@@ -23,12 +23,12 @@ key = [2,1,2,1,1;
     2,1,2,3,9;
     3,1,2,3,10;
     2,1,3,3,11;
-    3,1,3,3;12;
+    3,1,3,3,12;
     ];
 
 elseif(strcmp(side,'right'))
 %Right
-deformVals(3:4) = -deformVals(3:4);%y's inverted on right side
+deformVals(5:8) = -deformVals(5:8);%y's inverted on right side
 key = [2,2,2,1,1;
     3,2,2,1,2;
     2,2,3,1,3;

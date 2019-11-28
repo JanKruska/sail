@@ -10,23 +10,39 @@ allDeforms = permute(repmat(allDefs,[1 1 1 1 ffdP.nDeforms]),[5 1 2 3 4]);
 if(strcmp(side,'left'))
 %Left
 %Patter x-coord,y-coord,z-coord,direction(x=1,y=2,z=3),value
-key = [2,2,1,1,1;
-    2,2,2,1,2;
-    2,2,1,2,3;
-    2,2,2,2,4;
-    2,2,1,3,5;
-    2,2,2,3,6;
+key = [2,1,2,1,1;
+    3,1,2,1,2;
+    4,1,2,1,3;
+    5,1,2,1,4;
+    
+    2,1,2,2,5;
+    3,1,2,2,6;
+    4,1,2,2,7;
+    5,1,2,2,8;
+    
+    2,1,2,3,9;
+    3,1,2,3,10;
+    4,1,2,3,11;
+    5,1,2,3,12;
     ];
 
 elseif(strcmp(side,'right'))
 %Right
-deformVals(3:4) = -deformVals(3:4);%y's inverted on right side
-key = [2,1,1,1,1;
-    2,1,2,1,2;
-    2,1,1,2,3;
-    2,1,2,2,4;
-    2,1,1,3,5;
-    2,1,2,3,6;
+deformVals(5:8) = -deformVals(5:8);%y's inverted on right side
+key = [2,2,2,1,1;
+    3,2,2,1,2;
+    4,2,2,1,3;
+    5,2,2,1,4;
+    
+    2,2,2,2,5;
+    3,2,2,2,6;
+    4,2,2,2,7;
+    5,2,2,2,8;
+    
+    2,2,2,3,9;
+    3,2,2,3,10;
+    4,2,2,3,11;
+    5,2,2,3,12;
     ];
 end
 for i = 1:size(key,1)

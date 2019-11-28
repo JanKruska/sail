@@ -44,7 +44,7 @@ else
 		pause(10);
 		if (toc > 300); dragF = nan; return; end;
 	end
-	display(['|----| CFD done in ' seconds2human(toc)]);
+	disp(['|----| CFD done in ' num2str(fscanf(fopen([openFoamFolder 'all.timing'],'r'),'%d')) ' seconds']);
 
 	if exist(resultOutputFile, 'file')
 		disp(resultOutputFile);

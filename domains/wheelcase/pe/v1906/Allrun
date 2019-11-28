@@ -40,6 +40,7 @@ ls -d processor* | xargs -I {} cp -r 0org ./{}/0
 cp -r 0org 0
 
 
+cfdStart=`date +%s`
 runParallel patchSummary
 #runParallel potentialFoam
 runParallel $(getApplication)

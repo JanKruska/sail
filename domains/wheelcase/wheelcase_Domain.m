@@ -18,7 +18,7 @@ parse.addOptional('config','config1');
 
 parse.parse(varargin{:});
 d.nCases   = parse.Results.nCases;
-config = parse.Results.config;
+d.config = parse.Results.config;
 d.caseStart = parse.Results.caseStart;
 
 %------------- BEGIN CODE --------------
@@ -28,7 +28,7 @@ rmpath( genpath('domains'));
 addpath(genpath('domains/wheelcase/'));
 %Add only the chosen config
 rmpath(genpath('domains/wheelcase/configs/'));
-addpath(genpath(['domains/wheelcase/configs/' config]))
+addpath(genpath(['domains/wheelcase/configs/' d.config]))
 
 % - Scripts 
 % Common to any representations
@@ -47,8 +47,8 @@ d.sobolScale = @(x)wheelcase_SobolScale(x);
 
 
 stl = stlread('domains/wheelcase/ffd/combined_180.stl');
-ffdPLeft = makeFfdParameters(stl,['domains/wheelcase/configs/' config '/ffd_config_left.prm']);
-ffdPRight = makeFfdParameters(stl,['domains/wheelcase/configs/' config '/ffd_config_right.prm']);
+ffdPLeft = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_left.prm']);
+ffdPRight = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_right.prm']);
 d.express = @(x)wheelcase_Express(x,ffdPLeft,ffdPRight);
 d.base = stl.vertices;
 
