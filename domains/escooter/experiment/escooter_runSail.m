@@ -1,4 +1,4 @@
-function wheelcase_runSail(varargin)
+function escooter_runSail(varargin)
 % Runs SAIL velomobile optimization on cluster - [RUN THROUGH QSUB]
 %
 % Syntax:  [output1,output2] = function_name(input1,input2,input3)
@@ -62,13 +62,13 @@ for iRun = 1:nRuns
      p.data.predMapRes   = [25 25];  
 	 
 % Domain hyperparameters 
-d = wheelcase_Domain(...
+d = escooter_Domain(...
     'nCases',nCases,...
     'caseStart',caseStart,...
     'config',config);
 
 % Use Dummy Evaluation 
-%d.preciseEvaluate = 'wheelcase_DummyPreciseEvaluate';
+%d.preciseEvaluate = 'escooter_DummyPreciseEvaluate';
  
 %% Run SAIL
 runTime = tic;

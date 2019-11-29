@@ -1,5 +1,5 @@
-function feature = wheelcase_Categorize(samples, d)
-%wheelcase_Categorize - Categorizes samples along domain Features
+function feature = escooter_Categorize(samples, d)
+%escooter_Categorize - Categorizes samples along domain Features
 %
 % Syntax:  [observation, value] = af_InitialSamples(p)
 %

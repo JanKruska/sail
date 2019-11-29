@@ -75,7 +75,6 @@ disp('Running SAIL')
 rmCaseFolders(d);
 makeCaseFolders(d);
 output = sail(p,d);
-rmCaseFolders(d);
 disp(['Runtime: ' seconds2human(toc(runTime))]);
 
 %% Create New Prediction Map from produced surrogate
@@ -90,10 +89,11 @@ predMap = createPredictionMap(...
                
 save(['sail' num2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap');
 
-foundDesigns = reshape(predMap.genes,[p.data.predMapRes(1)*p.data.predMapRes(2),6]);
+foundDesigns = reshape(predMap.genes,[p.data.predMapRes(1)*p.data.predMapRes(2),d.dof]);
 trueFit = feval(d.preciseEvaluate,foundDesigns,d);
 
 save(['sail' num2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap','trueFit');
+rmCaseFolders(d);
 end
 
 %------------- END OF CODE --------------

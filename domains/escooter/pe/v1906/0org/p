@@ -41,7 +41,7 @@ boundaryField
         type            zeroGradient;
     }
 
-    veloGroup
+    bottomGroup
     {
         type            zeroGradient;
     }

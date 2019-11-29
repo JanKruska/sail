@@ -54,7 +54,7 @@ boundaryField
         value           uniform 0;
     }
 
-    veloGroup
+    bottomGroup
     {
         type            nutkWallFunction;
         value           uniform 0;

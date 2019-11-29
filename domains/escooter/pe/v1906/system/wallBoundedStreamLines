@@ -27,7 +27,7 @@ near
     );
 
     // Patches/groups to sample (regular expressions)
-    patches (veloGroup);
+    patches (bottomGroup);
 
     // Distance to sample
     distance 0.001;
@@ -75,7 +75,7 @@ wallBoundedStreamLines
     patchSeedCoeffs
     {
         type        patchSeed;
-        patches     (veloGroup);
+        patches     (bottomGroup);
         axis        x;  //distance;
         maxPoints   20000;
     }

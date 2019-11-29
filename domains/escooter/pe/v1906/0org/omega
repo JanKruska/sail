@@ -40,7 +40,7 @@ boundaryField
         value           $internalField;
     }
 
-    veloGroup
+    bottomGroup
     {
         type            omegaWallFunction;
         value           $internalField;

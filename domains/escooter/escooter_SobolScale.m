@@ -1,4 +1,4 @@
-function [seq] = wheelcase_SobolScale(seq)
+function [seq] = escooter_SobolScale(seq)
 
 if(size(seq,2)==6)
     %Scale genes mapped to y

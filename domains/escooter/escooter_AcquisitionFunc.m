@@ -1,7 +1,7 @@
-function [fitness,predValue] = wheelcase_AcquisitionFunc(drag,d)
-%wheelcase_AcquisitionFunc - Infill criteria based on uncertainty and fitness
+function [fitness,predValue] = escooter_AcquisitionFunc(drag,d)
+%escooter_AcquisitionFunc - Infill criteria based on uncertainty and fitness
 %
-% Syntax:  [fitness, dragForce] = wheelcase_AcquisitionFunc(drag,d)
+% Syntax:  [fitness, dragForce] = escooter_AcquisitionFunc(drag,d)
 %
 % Inputs:
 %   drag -    [2XN]    - dragForce mean and variance

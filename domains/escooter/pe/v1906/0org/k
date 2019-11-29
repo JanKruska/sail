@@ -41,7 +41,7 @@ boundaryField
         value           $internalField;
     }
 
-    veloGroup
+    bottomGroup
     {
         type            kqRWallFunction;
         value           $internalField;

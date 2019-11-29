@@ -75,7 +75,7 @@ functions
 {
     velo
     {
-        patches             (veloGroup);
+        patches             (bottomGroup);
         CofR                (0 0 0);
         writeControl        timeStep;
         writeInterval       1;

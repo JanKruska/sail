@@ -1,5 +1,5 @@
-function [FV] = wheelcase_Express(deformVals, ffdPLeft,ffdPRight)
-%wheelcase_Express - Expresses a genome by performing ffd on base stl
+function [FV] = escooter_Express(deformVals, ffdPLeft,ffdPRight)
+%escooter_Express - Expresses a genome by performing ffd on base stl
 
 % deformVals - Genomes of samples
 

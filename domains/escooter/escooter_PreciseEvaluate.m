@@ -1,5 +1,5 @@
-function [value] = wheelcase_PreciseEvaluate(nextObservations, d)
-%wheelcase_PreciseEvaluate - Send velomobile shapes in parallel to OpenFOAM func
+function [value] = escooter_PreciseEvaluate(nextObservations, d)
+%escooter_PreciseEvaluate - Send velomobile shapes in parallel to OpenFOAM func
 %
 % Syntax:  [observation, value] = af_InitialSamples(p)
 %
@@ -27,7 +27,7 @@ for iRound=0:nRounds-1
         obsIndx = iRound*nCases+iCase;          
         if obsIndx <= nObs
             openFoamFolder = [folderBaseName 'case' int2str(iCase+caseStart-1) '/']
-            PEValue(iCase) = wheelcase_OpenFoamResult(...
+            PEValue(iCase) = escooter_OpenFoamResult(...
                d.express(nextObservations(obsIndx,:)),...
                [openFoamFolder 'constant/triSurface/all_deformed.stl'],...
                openFoamFolder);

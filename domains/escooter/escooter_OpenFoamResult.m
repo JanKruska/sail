@@ -1,5 +1,5 @@
-function dragF = wheelcase_OpenFoamResult(x, stlFileName,openFoamFolder)
-%wheelcase_OpenFoamResult - Evaluates a single shape in OpenFOAM
+function dragF = escooter_OpenFoamResult(x, stlFileName,openFoamFolder)
+%escooter_OpenFoamResult - Evaluates a single shape in OpenFOAM
 %
 % Syntax:  [observation, value] = af_InitialSamples(p)
 %

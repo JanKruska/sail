@@ -17,7 +17,7 @@ forceCoeffs1
 
     log         yes;
 
-    patches     (veloGroup);
+    patches     (bottomGroup);
     p           p;
     U           U;
     rho         rhoInf;      // Indicates incompressible (rhoInf)
