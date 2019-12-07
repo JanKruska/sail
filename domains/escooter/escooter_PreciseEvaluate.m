@@ -27,14 +27,17 @@ for iRound=0:nRounds-1
         obsIndx = iRound*nCases+iCase;          
         if obsIndx <= nObs
             openFoamFolder = [folderBaseName 'case' int2str(iCase+caseStart-1) '/']
+            stl = stlmerge(d.express(nextObservations(obsIndx,:)),d.base)
             PEValue(iCase) = escooter_OpenFoamResult(...
-               stlmerge(d.express(nextObservations(obsIndx,:)),d.base),...
+                stl,...
                [openFoamFolder 'constant/triSurface/all_deformed.stl'],...
                openFoamFolder);
         end
     end  
     disp(['Round ' int2str(iRound) ' -- Time so far ' seconds2human(toc)])
    
+%                stlmerge(d.express(nextObservations(obsIndx,:)),d.base),...
+
     % Assign results of batch 
     obsIndices = 1+iRound*nCases:nCases+iRound*nCases;
     filledIndices = obsIndices(obsIndices<=nObs);

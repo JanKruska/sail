@@ -42,7 +42,7 @@ d.loadInitialSamples = false;
 d.initialSampleSource= '';
 
 %Sobol parameters
-% d.sobolScale = @(x)escooter_SobolScale(x);
+d.sobolScale = @(x)escooter_SobolScale(x);
 
 
 
