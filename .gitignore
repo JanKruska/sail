@@ -52,3 +52,5 @@ part*.stl
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+.eMesh
