@@ -14,31 +14,8 @@ function feature = escooter_Categorize(samples, d)
     nSamples= size(samples,1);
     feature = nan(nSamples,2);
     
-    for i = 1:size(samples)
-        second = samples(i,2);
-        third = samples(i,3);
-        fourth = samples(i,4);
-        fifth = samples(i,5);
-
-        if (second>0 && third>0) % deformation to inside
-            completeWidth = 0;
-        elseif (second>0 && third<0)
-            width1 = abs(third);
-            % width2 = abs(third)
-            completeWidth = width1*2;
-        elseif (second<0 && third>0)
-            width1 = abs(second);
-            completeWidth = width1*2;
-        else
-            width1 = abs(second);
-            width2 = abs(third);
-            completeWidth = max(width1,width2)*2;
-        end
-        if (fifth<0)
-            maxHeight = 0;
-        else
-            maxHeight = fifth;
-        end
-        feature(i,:) = [completeWidth, maxHeight];
-    end
+    feature(:,1) = max(samples,[],2);
+    feature(:,2) = max(samples,[],2) - min(samples,[],2);
     
+feature = (feature-d.featureMin)./(d.featureMax-d.featureMin);
+feature(feature>1) = 1; feature(feature<0) = 0;

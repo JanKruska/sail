@@ -13,9 +13,9 @@ export MALLOC_ARENA_MAX=4
 
 module load java/default
 module load cuda/default
-module load matlab
+module load matlab/R2019b
 module load openmpi/gnu
 source ~/OpenFOAM-plus/etc/bashrc
 
 # Run experiment
-matlab -nodisplay -nosplash -nodesktop -r "escooter_runSail('nCases',10,'caseStart',11,'gens',11)"
+matlab -batch "escooter_runSail('nCases',5,'caseStart',200,'gens',11)"

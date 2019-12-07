@@ -26,9 +26,9 @@ d.caseStart = parse.Results.caseStart;
 d.name = ['escooter_'];
 rmpath( genpath('domains'));
 addpath(genpath('domains/escooter/'));
-%Add only the chosen config
-%rmpath(genpath('domains/escooter/configs/'));
-%addpath(genpath(['domains/escooter/configs/' config]))
+% Add only the chosen config
+rmpath(genpath('domains/escooter/configs/'));
+addpath(genpath(['domains/escooter/configs/' config]))
 
 % - Scripts 
 % Common to any representations
@@ -42,15 +42,14 @@ d.loadInitialSamples = false;
 d.initialSampleSource= '';
 
 %Sobol parameters
-d.sobolScale = @(x)escooter_SobolScale(x);
+% d.sobolScale = @(x)escooter_SobolScale(x);
 
 
 
-stl = stlread('domains/escooter/ffd/combined.stl');
+stl = stlread('domains/escooter/ffd/deformable_component.stl');
 ffdP = makeFfdParameters(stl,['domains/escooter/configs/' config '/ffd_config.prm']);
-%ffdPRight = makeFfdParameters(stl,['domains/escooter/configs/' config '/ffd_config_right.prm']);
 d.express = @(x)escooter_Express(x,ffdP);
-d.base = stl.vertices;
+d.base = stlread('domains/escooter/ffd/CFD_Model.stl');
 
 d.dof = getDof();
 

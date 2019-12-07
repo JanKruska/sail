@@ -1,18 +1,9 @@
 % %% FFD - Adapted from PyGeM
 % TODO: Proper header and documentation
 
-function [FV] = performffd(meshPoints,ffdP,allDeforms)
+function [FV] = performffd(ffdP,allDeforms)
 % meshPoints - original foil points and should be input for general use
     nDeforms = ffdP.nDeforms;
-    
-    % How the 16 parameters map to the 36 degrees of freedom
-    %ffdP.defValKey = [1,1,4,4,7,7,10,10,3,6,9,12;2,2,5,5,8,8,11,11,13,14,15,16;3,3,6,6,9,9,12,12,3,6,9,12];
-    
-    %allDefs = cat(4,ffdP.x,ffdP.y,ffdP.z);
-    
-    % Indexes of active dimensions
-    %ffdP.ffdDof = find(allDefs(:)~=0);
-    
     nDimX = ffdP.nDimX;
     nDimY = ffdP.nDimY;
     nDimZ = ffdP.nDimZ;

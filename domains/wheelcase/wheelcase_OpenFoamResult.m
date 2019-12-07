@@ -1,4 +1,4 @@
-function dragF = wheelcase_OpenFoamResult(x, stlFileName,openFoamFolder)
+function fitness = wheelcase_OpenFoamResult(x, stlFileName,openFoamFolder)
 %wheelcase_OpenFoamResult - Evaluates a single shape in OpenFOAM
 %
 % Syntax:  [observation, value] = af_InitialSamples(p)
@@ -12,7 +12,7 @@ function dragF = wheelcase_OpenFoamResult(x, stlFileName,openFoamFolder)
 %    drag F  - [1X1] drag force result
 %
 %------------- BEGIN CODE --------------
-dragF = nan;
+fitness = nan;
 
 % Create STL
 stlwrite(stlFileName, x);
@@ -34,7 +34,7 @@ else
 	while ~exist([openFoamFolder 'mesh.timing'] ,'file')
 		display(['Waiting for Meshing: ' seconds2human(toc)]);
 		pause(10);
-		if (toc > 300); dragF = nan; return; end;
+		if (toc > 300); fitness = nan; return; end;
 	end
 	%display(['|----| Meshing done in ' seconds2human(toc)]);
 
@@ -42,7 +42,7 @@ else
 	while ~exist([openFoamFolder 'all.timing'] ,'file')
 		display(['Waiting for CFD: ' seconds2human(toc)]);
 		pause(10);
-		if (toc > 300); dragF = nan; return; end;
+		if (toc > 300); fitness = nan; return; end;
 	end
 	disp(['|----| CFD done in ' num2str(fscanf(fopen([openFoamFolder 'all.timing'],'r'),'%d')) ' seconds']);
 
@@ -50,14 +50,14 @@ else
 		disp(resultOutputFile);
 		result = importdata(resultOutputFile);
 		cD = result.data(:,3);
-		dragF = -mean(cD(100:200));
-		disp(dragF);
-		if dragF > 30 % Sanity check to prevent model destruction
-			disp(['|-------> Drag Force calculated as ' num2str(dragF) ' (returning NaN)']);
-			dragF = nan; 
+		fitness = -mean(cD(100:200));
+		disp(fitness);
+		if fitness > 30 % Sanity check to prevent model destruction
+			disp(['|-------> Drag Force calculated as ' num2str(fitness) ' (returning NaN)']);
+			fitness = nan; 
 			save([openFoamFolder  'error' int2str(randi(1000,1)) '.mat'], 'x');
 		else
-			disp(['|-------> Drag Force calculated as ' num2str(dragF)]);
+			disp(['|-------> Drag Force calculated as ' num2str(fitness)]);
 		end
 	else
 		save([openFoamFolder  'error' int2str(randi(100,1)) '.mat']);    

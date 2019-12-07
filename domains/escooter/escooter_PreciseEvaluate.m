@@ -28,7 +28,7 @@ for iRound=0:nRounds-1
         if obsIndx <= nObs
             openFoamFolder = [folderBaseName 'case' int2str(iCase+caseStart-1) '/']
             PEValue(iCase) = escooter_OpenFoamResult(...
-               d.express(nextObservations(obsIndx,:)),...
+               stlmerge(d.express(nextObservations(obsIndx,:)),d.base),...
                [openFoamFolder 'constant/triSurface/all_deformed.stl'],...
                openFoamFolder);
         end
@@ -40,7 +40,7 @@ for iRound=0:nRounds-1
     filledIndices = obsIndices(obsIndices<=nObs);
     value(filledIndices) = PEValue(1:length(filledIndices));
 end
-nonConstraintIdxs = or(nextObservations(:,3) > -1.5, nextObservations(:,3) > -0.2);
-value(nonConstraintIdxs) = value(nonConstraintIdxs) - 1;
+% nonConstraintIdxs = or(nextObservations(:,3) > -1.5, nextObservations(:,3) > -0.2);
+% value(nonConstraintIdxs) = value(nonConstraintIdxs) - 1;
 
 %------------- END OF CODE --------------

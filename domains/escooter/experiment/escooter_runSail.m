@@ -50,7 +50,7 @@ for iRun = 1:nRuns
 	p = sail;               % loads default hyperparameters
 	 p.nInitialSamples   = 60;   
 	 p.nAdditionalSamples= 10;    
-	 p.nTotalSamples	 = 1000;       
+	 p.nTotalSamples	 = 500;       
 	  
 	 p.nChildren         = 2^5;
 	 p.nGens             = 2^gens;
@@ -68,7 +68,7 @@ d = escooter_Domain(...
     'config',config);
 
 % Use Dummy Evaluation 
-%d.preciseEvaluate = 'escooter_DummyPreciseEvaluate';
+% d.preciseEvaluate = 'escooter_DummyPreciseEvaluate';
  
 %% Run SAIL
 runTime = tic;
