@@ -49,15 +49,15 @@ else
 	if exist(resultOutputFile, 'file')
 		disp(resultOutputFile);
 		result = importdata(resultOutputFile);
-		cD = result.data(:,3);
-		fitness = -mean(cD(100:200));
-		disp(fitness);
+		cD = result.data(:,2);
+		fitness = log(mean(cD(100:200)));
+% 		disp(fitness);
 		if fitness > 30 % Sanity check to prevent model destruction
-			disp(['|-------> Drag Force calculated as ' num2str(fitness) ' (returning NaN)']);
+			disp(['|-------> Fitness calculated as ' num2str(fitness) ' (returning NaN)']);
 			fitness = nan; 
 			save([openFoamFolder  'error' int2str(randi(1000,1)) '.mat'], 'x');
 		else
-			disp(['|-------> Drag Force calculated as ' num2str(fitness)]);
+			disp(['|-------> Fitness calculated as ' num2str(fitness)]);
 		end
 	else
 		save([openFoamFolder  'error' int2str(randi(100,1)) '.mat']);    

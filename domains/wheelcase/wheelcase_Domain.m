@@ -41,10 +41,6 @@ d.validate          = 'wheelcase_ValidateChildren';
 d.loadInitialSamples = false;
 d.initialSampleSource= '';
 
-%Sobol parameters
-d.sobolScale = @(x)wheelcase_SobolScale(x);
-
-
 
 stl = stlread('domains/wheelcase/ffd/combined_180.stl');
 ffdPLeft = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_left.prm']);
@@ -52,14 +48,23 @@ ffdPRight = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_c
 d.express = @(x)wheelcase_Express(x,ffdPLeft,ffdPRight);
 d.base = stl.vertices;
 
+%Right wheelcase & Steering space needed for maximum steering angle, used
+%for constraint
+stl = stlread('domains/wheelcase/ffd/wheelcase_right_180.stl');
+ffdPWheelcase = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_right.prm']);
+d.expressRight = @(x)wheelcase_ExpressRight(x,ffdPWheelcase);
+
+d.steeringSpace = stlread('domains/wheelcase/ffd/radausschlag.stl');
+
 d.dof = getDof();
 
 % - Feature Space
 d.featureRes = [25 25];
 d.nDims      = length(d.featureRes);
-d.featureMin = [0 0];
-d.featureMax = [4 0.2];
-d.featureLabels = {'velo width', 'velo height'}; % {X label, Y label}
+d.featureMin = [300 -600];
+d.featureMax = [450 200];
+% d.featureLabels = {'velo width', 'velo height'}; % {X label, Y label}
+d.featureLabels = {'velo width', 'Y-Pos of widest point'}; % {X label, Y label}
 d.extraMapValues = {'cD','confidence'};
 
 % - GP Models

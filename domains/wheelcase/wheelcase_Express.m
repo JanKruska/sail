@@ -3,7 +3,7 @@ function [FV] = wheelcase_Express(deformVals, ffdPLeft,ffdPRight)
 
 % deformVals - Genomes of samples
 
-% deformVals = (deformVals*2)-1;
+deformVals = genomeScale(deformVals);
 
 nDeforms = size(deformVals,1);
 ffdPLeft.nDeforms = nDeforms;

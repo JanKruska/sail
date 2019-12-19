@@ -20,9 +20,11 @@ function [FV] = performffd(ffdP,allDeforms)
 aux_x = zeros(nDeforms,1); aux_y = aux_x;  aux_z = aux_x;
 for j = 1:nDimY
     for k = 1:nDimZ
-        bernstein_yz = ffdP.bernstein_y(j,:) .* ffdP.bernstein_z(k,:);
+         bernstein_yz = ffdP.bernstein_y(j,:) .* ffdP.bernstein_z(k,:);
         for i = 1:nDimX
-            aux = ffdP.bernstein_x(i,:) .* bernstein_yz;
+            auxReal = ffdP.bernstein_x(i,:) .* bernstein_yz;
+            aux = ffdP.aux{i,j,k};
+            eq = isequal(aux,auxReal);
             aux_x = aux_x + aux .* allDeforms(:, i, j, k, 1);
             aux_y = aux_y + aux .* allDeforms(:, i, j, k, 2);
             aux_z = aux_z + aux .* allDeforms(:, i, j, k, 3);

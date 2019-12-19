@@ -74,7 +74,9 @@ while nSamples <= p.nTotalSamples
     % Save found model parameters and update acquisition function
     for iModel=1:size(value,2); d.gpParams(iModel).hyp = gpModel{iModel}.hyp; end
     acqFunction = feval(d.createAcqFunction, gpModel, d);
-        
+    
+    save('lastGpModel.mat','gpModel');
+    
     % -- Data Gathering -- %   
     trainingTime = [trainingTime toc(tstart)];    
     

@@ -37,10 +37,10 @@ p.covfunc   = @covSEiso;
 p.hyp.cov   = [log(0.5);0];%log(ell); log(sigma)
 
 p.meanfunc  = {@meanConst};  
-p.hyp.mean  = 1;
+p.hyp.mean  = 0;
 
 p.likfunc   = @likGauss;     
-p.hyp.lik   = log(5); % log(sigma)
+p.hyp.lik   = log(1); % log(sigma)
 
 p.functionEvals = 100;      % function evals to optimize hyperparams
 

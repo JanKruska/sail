@@ -37,11 +37,16 @@ function [ffdP] = computeBernstein(ffdP)
         aux2 = (  validPoints(:,3)) .^(i-1);
         bernstein_z(i,:) = nchoosek(nDimZ-1, i-1) .* (aux1' .* aux2');
     end
-    
-    %Unscale all point that wont be modified by ffd
-% meshPoints(setdiff(1:end,validIdxs),1) = meshPoints(setdiff(1:end,validIdxs),1).*ffdP.xHeight+ffdP.xOrigin;
-% meshPoints(setdiff(1:end,validIdxs),2) = meshPoints(setdiff(1:end,validIdxs),2).*ffdP.yHeight+ffdP.yOrigin;
-% meshPoints(setdiff(1:end,validIdxs),3) = meshPoints(setdiff(1:end,validIdxs),3).*ffdP.zHeight+ffdP.zOrigin;
+
+aux = cell(nDimX,nDimY,nDimZ);
+for j = 1:nDimY
+    for k = 1:nDimZ
+        bernstein_yz = bernstein_y(j,:) .* bernstein_z(k,:);
+        for i = 1:nDimX
+            aux{i,j,k} = bernstein_x(i,:) .* bernstein_yz;
+        end
+    end
+end
     
     %% Save Precomputable
 %     ffdP.allDefs = allDefs;
@@ -52,6 +57,7 @@ function [ffdP] = computeBernstein(ffdP)
     ffdP.bernstein_y = bernstein_y;
     ffdP.bernstein_z = bernstein_z;
     ffdP.validIdxs = validIdxs;
+    ffdP.aux = aux;
     %ffdP.meshPoints = meshPoints;
 end
 

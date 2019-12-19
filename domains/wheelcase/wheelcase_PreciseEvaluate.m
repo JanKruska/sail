@@ -41,6 +41,6 @@ for iRound=0:nRounds-1
     value(filledIndices) = PEValue(1:length(filledIndices));
 end
 nonConstraintIdxs = or(nextObservations(:,3) > -1.5, nextObservations(:,3) > -0.2);
-value(nonConstraintIdxs) = value(nonConstraintIdxs) - 1;
+value(nonConstraintIdxs) = value(nonConstraintIdxs) + 1;
 
 %------------- END OF CODE --------------
