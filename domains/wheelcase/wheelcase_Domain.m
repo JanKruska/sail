@@ -42,7 +42,7 @@ d.loadInitialSamples = false;
 d.initialSampleSource= '';
 
 
-stl = stlread('domains/wheelcase/ffd/combined_180.stl');
+[stl.vertices,stl.faces] = readSTL('domains/wheelcase/ffd/combined_180.stl','JoinCorners',true);
 ffdPLeft = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_left.prm']);
 ffdPRight = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_right.prm']);
 d.express = @(x)wheelcase_Express(x,ffdPLeft,ffdPRight);
@@ -50,11 +50,12 @@ d.base = stl.vertices;
 
 %Right wheelcase & Steering space needed for maximum steering angle, used
 %for constraint
-stl = stlread('domains/wheelcase/ffd/wheelcase_right_180.stl');
+[stl.vertices,stl.faces] = readSTL('domains/wheelcase/ffd/wheelcase_right_remesh.stl','JoinCorners',true);
 ffdPWheelcase = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_right.prm']);
 d.expressRight = @(x)wheelcase_ExpressRight(x,ffdPWheelcase);
 
-d.steeringSpace = stlread('domains/wheelcase/ffd/radausschlag.stl');
+[d.steeringSpace.vertices,d.steeringSpace.faces] = readSTL('domains/wheelcase/ffd/turning_volume.stl','JoinCorners',true);
+d.constraintVolumeBase = 1.6E6;
 
 d.dof = getDof();
 

@@ -1,10 +1,11 @@
-function [fitness,predValue] = wheelcase_AcquisitionFunc(drag,d)
+function [fitness,predValue] = wheelcase_AcquisitionFunc(drag,genome,d)
 %wheelcase_AcquisitionFunc - Infill criteria based on uncertainty and fitness
 %
 % Syntax:  [fitness, dragForce] = wheelcase_AcquisitionFunc(drag,d)
 %
 % Inputs:
 %   drag -    [2XN]    - dragForce mean and variance
+%   genome - the genome of the individual
 %   d    -             - domain struct 
 %
 % Outputs:
@@ -13,8 +14,10 @@ function [fitness,predValue] = wheelcase_AcquisitionFunc(drag,d)
 %
 
 %------------- BEGIN CODE --------------
-
-fitness = (drag(:,1)*d.muCoef) + (drag(:,2)*d.varCoef); % better fitness is higher fitness  
+FV = d.expressRight(genome);
+penalties = penalty(FV,d);
+fitness = (drag(:,1)*d.muCoef) + (drag(:,2)*d.varCoef) ...
+    - (penalties ./ d.constraintVolumeBase); % better fitness is higher fitness  
 predValue{1} = drag(:,1);
 predValue{2} = drag(:,2);
 
