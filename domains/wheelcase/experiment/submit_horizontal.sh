@@ -18,4 +18,4 @@ module load openmpi/gnu
 source ~/OpenFOAM-plus/etc/bashrc
 
 # Run experiment
-matlab -batch "wheelcase_runSail('nCases',5,'caseStart',100,'gens',11,'config','2pt4x2x3hor')"
+matlab -batch "wheelcase_runSail('nCases',4,'caseStart',100,'gens',9,'config','2pt4x2x3hor')"

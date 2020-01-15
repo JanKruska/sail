@@ -66,7 +66,7 @@ d.featureMin = [300 -600];
 d.featureMax = [450 200];
 % d.featureLabels = {'velo width', 'velo height'}; % {X label, Y label}
 d.featureLabels = {'velo width', 'Y-Pos of widest point'}; % {X label, Y label}
-d.extraMapValues = {'cD','confidence'};
+d.extraMapValues = {'cD','confidence','constraint'};
 
 % - GP Models
 d.gpParams(1)= paramsGP(d.dof); % Drag Force

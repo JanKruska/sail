@@ -47,9 +47,9 @@ for iRun = 1:nRuns
 
 %% Algorithm hyperparameters 
 	p = sail;               % loads default hyperparameters
-	 p.nInitialSamples   = 60;   
+	 p.nInitialSamples   = 100;   
 	 p.nAdditionalSamples= 10;    
-	 p.nTotalSamples	 = 1000;       
+	 p.nTotalSamples	 = 250;       
 	  
 	 p.nChildren         = 2^5;
 	 p.nGens             = 2^gens;
@@ -67,7 +67,7 @@ d = wheelcase_Domain(...
     'config',config);
 
 % Use Dummy Evaluation 
-d.preciseEvaluate = 'wheelcase_DummyPreciseEvaluate';
+% d.preciseEvaluate = 'wheelcase_DummyPreciseEvaluate';
  
 %% Run SAIL
 runTime = tic;

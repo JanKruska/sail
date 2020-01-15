@@ -4,9 +4,10 @@ function [allDeforms] = createDeforms(deformVals,ffdP,side)
 
 
 
+nDeforms = size(deformVals,1);
 allDefs = cat(4,ffdP.x,ffdP.y,ffdP.z);
 
-allDeforms = permute(repmat(allDefs,[1 1 1 1 ffdP.nDeforms]),[5 1 2 3 4]);
+allDeforms = permute(repmat(allDefs,[1 1 1 1 nDeforms]),[5 1 2 3 4]);
 if(strcmp(side,'left'))
 %Left
 %Patter x-coord,y-coord,z-coord,direction(x=1,y=2,z=3),value
