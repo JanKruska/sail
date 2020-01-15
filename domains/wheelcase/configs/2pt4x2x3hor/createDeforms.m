@@ -11,6 +11,7 @@ allDeforms = permute(repmat(allDefs,[1 1 1 1 nDeforms]),[5 1 2 3 4]);
 if(strcmp(side,'left'))
 %Left
 %Patter x-coord,y-coord,z-coord,direction(x=1,y=2,z=3),value
+deformVals(:,3:4) = -deformVals(:,3:4);%y's inverted on left side
 key = [2,1,2,1,1;
     3,1,2,1,2;
     2,1,2,2,3;
@@ -21,7 +22,6 @@ key = [2,1,2,1,1;
 
 elseif(strcmp(side,'right'))
 %Right
-deformVals(3:4) = -deformVals(3:4);%y's inverted on right side
 key = [2,2,2,1,1;
     3,2,2,1,2;
     2,2,2,2,3;

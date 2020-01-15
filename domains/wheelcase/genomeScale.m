@@ -2,7 +2,7 @@ function [seq] = genomeScale(seq)
 
 if(size(seq,2)==6)
     %Scale genes mapped to y
-    seq(:,[3,4]) = seq(:,[3,4]) .* 1 - 0;
+    seq(:,[3,4]) = seq(:,[3,4]) .* 1.5 - 0;
     %Scale genes mapped to x,z
     seq(:,[1,2,5,6]) = seq(:,[1,2,5,6]) .* 0.5 - 0.25;
 elseif(size(seq,2)==12)
