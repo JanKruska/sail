@@ -11,7 +11,7 @@ parse = inputParser;
 parse.addOptional('nCases'  , 1);
 parse.addOptional('caseStart', 1);
 parse.addOptional('config','config1');
-
+parse.addOptional('constraint', false);
 parse.addOptional('gens',6);
 
 parse.parse(varargin{:});
@@ -19,6 +19,7 @@ nCases   = parse.Results.nCases;
 config = parse.Results.config;
 caseStart = parse.Results.caseStart;
 gens = parse.Results.gens;
+constraint = parse.Results.constraint;
 
 id = getenv('SLURM_JOB_ID');
 
@@ -48,8 +49,8 @@ for iRun = 1:nRuns
 %% Algorithm hyperparameters 
 	p = sail;               % loads default hyperparameters
 	 p.nInitialSamples   = 100;   
-	 p.nAdditionalSamples= 10;    
-	 p.nTotalSamples	 = 250;       
+	 p.nAdditionalSamples= 20;    
+	 p.nTotalSamples	 = 1000;       
 	  
 	 p.nChildren         = 2^5;
 	 p.nGens             = 2^gens;
@@ -64,7 +65,8 @@ for iRun = 1:nRuns
 d = wheelcase_Domain(...
     'nCases',nCases,...
     'caseStart',caseStart,...
-    'config',config);
+    'config',config,...
+    'constraint',constraint);
 
 % Use Dummy Evaluation 
 % d.preciseEvaluate = 'wheelcase_DummyPreciseEvaluate';
@@ -80,7 +82,7 @@ disp(['Runtime: ' seconds2human(toc(runTime))]);
 %% Create New Prediction Map from produced surrogate
 
 % Adjust hyperparameters
-p.nGens = 2*p.nGens;
+p.nGens = 4*p.nGens;
  
 predMap = createPredictionMap(...
             output.model,...               % Model for evaluation
@@ -93,7 +95,7 @@ foundDesigns = reshape(predMap.genes,[p.data.predMapRes(1)*p.data.predMapRes(2),
 %trueFit = feval(d.preciseEvaluate,foundDesigns,d);
 
 %save(['sail' num2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap','trueFit');
-rmCaseFolders(d);
+%rmCaseFolders(d);
 end
 
 %------------- END OF CODE --------------

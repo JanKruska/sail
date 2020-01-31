@@ -15,31 +15,44 @@ parse = inputParser;
 parse.addOptional('nCases'  , 10);
 parse.addOptional('caseStart', 1);
 parse.addOptional('config','config1');
+parse.addOptional('constraint', false);
 
 parse.parse(varargin{:});
 d.nCases   = parse.Results.nCases;
 d.config = parse.Results.config;
 d.caseStart = parse.Results.caseStart;
+constraint = parse.Results.constraint;
 
 %------------- BEGIN CODE --------------
 
 d.name = ['wheelcase_'];
-rmpath( genpath('domains'));
+
+rmpath(genpath('domains'));
 addpath(genpath('domains/wheelcase/'));
 %Add only the chosen config
 rmpath(genpath('domains/wheelcase/configs/'));
 addpath(genpath(['domains/wheelcase/configs/' d.config]))
 
+
 % - Scripts 
 % Common to any representations
 d.preciseEvaluate   = 'wheelcase_PreciseEvaluate';    %
 d.categorize        = 'wheelcase_Categorize';         %
-d.createAcqFunction = 'wheelcase_CreateAcqFunc';      %
 d.validate          = 'wheelcase_ValidateChildren';
 
 % - Alternative initialization
 d.loadInitialSamples = false;
 d.initialSampleSource= '';
+
+if(constraint)
+   d.createAcqFunction = 'wheelcase_CreateAcqFuncConstraint';
+   [d.steeringSpace.vertices,d.steeringSpace.faces] = readSTL('domains/wheelcase/ffd/turning_volume.stl','JoinCorners',true);
+   d.constraintVolumeBase = 1.6E6;
+   d.extraMapValues = {'cD','confidence','constraint'};
+else
+   d.createAcqFunction = 'wheelcase_CreateAcqFunc';      %
+   d.extraMapValues = {'cD','confidence'};
+end
 
 
 [stl.vertices,stl.faces] = readSTL('domains/wheelcase/ffd/combined_180.stl','JoinCorners',true);
@@ -54,9 +67,6 @@ d.base = stl.vertices;
 ffdPWheelcase = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_right.prm']);
 d.expressRight = @(x)wheelcase_ExpressRight(x,ffdPWheelcase);
 
-[d.steeringSpace.vertices,d.steeringSpace.faces] = readSTL('domains/wheelcase/ffd/turning_volume.stl','JoinCorners',true);
-d.constraintVolumeBase = 1.6E6;
-
 d.dof = getDof();
 
 % - Feature Space
@@ -65,8 +75,7 @@ d.nDims      = length(d.featureRes);
 d.featureMin = [300 -600];
 d.featureMax = [450 200];
 % d.featureLabels = {'velo width', 'velo height'}; % {X label, Y label}
-d.featureLabels = {'velo width', 'Y-Pos of widest point'}; % {X label, Y label}
-d.extraMapValues = {'cD','confidence','constraint'};
+d.featureLabels = {'velo width', 'X-Pos of widest point'}; % {X label, Y label}
 
 % - GP Models
 d.gpParams(1)= paramsGP(d.dof); % Drag Force
@@ -76,6 +85,9 @@ d.nVals = 2; % number of values of interest
 % Acquisition function
 d.varCoef = 2;  % variance weight
 d.muCoef  = 1;  % mean weight 
+d.conCoef = 1;  % constraint weight
+
+d.invalidPenalties = [];
 
 % Cluster
 % % Cases are executed and stored here (cases are started elsewhere)

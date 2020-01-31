@@ -19,7 +19,7 @@ cd ~/Code/sail
 d = wheelcase_Domain('config','2pt4x2x3hor');
 
 
-nSamples = 2^10;
+nSamples = 2^14;
 %samples = zeros(1,nSamples);
 %[stl.vertices,stl.faces] = readSTL('domains/wheelcase/ffd/wheelcase_right_remesh.stl','JoinCorners',true);
 rng(17011998);

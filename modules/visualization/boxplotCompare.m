@@ -1,0 +1,6 @@
+function fig = boxplotCompare(mapUnconstrained,mapConstrained)
+    boxplot(cat(2,reshape(mapUnconstrained,[numel(mapUnconstrained),1]),...
+        reshape(mapConstrained,[numel(mapConstrained),1])),...
+    {'Unconstrained','Constrained'});
+    fig = gcf;
+end

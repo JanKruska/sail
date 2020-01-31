@@ -1,4 +1,4 @@
 function [dof] = getDof()
-    dof = 12;
+    dof = 18;
 end
 

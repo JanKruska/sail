@@ -3,9 +3,9 @@
 
 # n control points indicates the number of control points in each direction (x, y, z).
 # For example, to create a 2 x 3 x 2 grid, use the following: n control points: 2, 3, 2
-n control points x: 6
+n control points x: 5
 n control points y: 2
-n control points z: 3
+n control points z: 4
 
 # box lenght indicates the length of the FFD bounding box along the three canonical directions (x, y, z).
 # It uses the local coordinate system.

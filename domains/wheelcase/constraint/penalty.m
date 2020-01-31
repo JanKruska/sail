@@ -9,22 +9,20 @@ function [penalties,invalid] = penalty(samples,d)
 %
 
 nSamples = size(samples,2);
-penalties = nan(1,nSamples);
-invalid = logical(false(1,nSamples));
+penalties = nan(nSamples,1);
+invalid = logical(false(nSamples,1));
 turningVolume = d.steeringSpace;
 
-for i = 1:nSamples
-%     verts = samples{i}.vertices;
-%     inside = inpolyhedron(d.steeringSpace,verts);
-%     penalties(i,1) = sum(inside)/size(inside,1);
+parfor i = 1:nSamples
 try
     [verts,faces] = mesh_boolean(turningVolume.vertices,turningVolume.faces,...
         samples(i).vertices,samples(i).faces,'minus',...
         'BooleanLib','libigl');%,'Debug',true);
     [verts,tetra,~] = tetgen(verts,faces);%,'Verbose',true);
-    penalties(1,i) = sum(volume(verts,tetra));
-catch
-    invalid(1,i) = true;
+    penalties(i,1) = sum(volume(verts,tetra));
+catch e
+    invalid(i,1) = true;
+%    fprintf(1,'Penalty calculation crashed with an error of type %s! The message was:\n%s',e.identifier,e.message);
 %     disp(['Constraint calculation crashed for i=' num2str(i) ' returning NaN']);
 end
 end
