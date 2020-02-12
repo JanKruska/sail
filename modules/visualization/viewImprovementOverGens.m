@@ -17,4 +17,7 @@ function viewImprovementOverGens(percImproved)
     end
     err = std(graphs,0,2);
     shadedErrorBar([],graphs',{@mean,@std});
+    
+    xlabel('Generations');
+    ylabel('% of improved children');
 end

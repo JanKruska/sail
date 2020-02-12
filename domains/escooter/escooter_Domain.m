@@ -41,24 +41,19 @@ d.validate          = 'escooter_ValidateChildren';
 d.loadInitialSamples = false;
 d.initialSampleSource= '';
 
-%Sobol parameters
-d.sobolScale = @(x)escooter_SobolScale(x);
-
-
-
-stl = stlread('domains/escooter/ffd/deformable_component.stl');
+[stl.vertices,stl.faces] = readSTL('domains/escooter/ffd/deformable_component.stl','JoinCorners',true);
 ffdP = makeFfdParameters(stl,['domains/escooter/configs/' config '/ffd_config.prm']);
 d.express = @(x)escooter_Express(x,ffdP);
-d.base = stlread('domains/escooter/ffd/CFD_Model.stl');
+[d.base.vertices,d.base.faces] = readSTL('domains/escooter/ffd/CFD_Model_V2.5.stl','JoinCorners',true);
 
 d.dof = getDof();
 
 % - Feature Space
 d.featureRes = [25 25];
 d.nDims      = length(d.featureRes);
-d.featureMin = [0 0];
-d.featureMax = [4 0.2];
-d.featureLabels = {'velo width', 'velo height'}; % {X label, Y label}
+d.featureMin = [80 -160];
+d.featureMax = [220 -410];
+d.featureLabels = {'lowest point', 'x-Pos of lowest Point'}; % {X label, Y label}
 d.extraMapValues = {'cD','confidence'};
 
 % - GP Models

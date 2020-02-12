@@ -56,3 +56,4 @@ Thumbs.db
 .eMesh
 #Folder containing results(mats pngs etc.)
 results
+exclude

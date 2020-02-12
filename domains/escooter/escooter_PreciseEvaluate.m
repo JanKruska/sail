@@ -18,7 +18,7 @@ nObs    = size(nextObservations,1);
 nCases  = d.nCases;
 nRounds = ceil(nObs/d.nCases);
 caseStart = d.caseStart;
-tic
+tic;
 value = nan(nObs,1);
 for iRound=0:nRounds-1
     PEValue = nan(nCases,1);

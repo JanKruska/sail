@@ -2,6 +2,8 @@ function [FV] = escooter_Express(deformVals, ffdP)
 %escooter_Express - Expresses a genome by performing ffd on base stl
 % deformVals - Genomes of samples
 
+deformVals = genomeScale(deformVals);
+
 nDeforms = size(deformVals,1);
 ffdP.nDeforms = nDeforms;
 

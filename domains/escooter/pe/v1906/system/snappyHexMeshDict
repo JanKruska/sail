@@ -127,7 +127,7 @@ castellatedMeshControls
     }
 
     // Resolve sharp angles
-    resolveFeatureAngle 30;
+    resolveFeatureAngle 20;
 
 
     // Region-wise refinement
@@ -148,7 +148,8 @@ castellatedMeshControls
         allDef
         {
             mode distance;
-            levels ( (0.1 6) (0.5 4) (1.0 2) );
+            levels ( (0.1 4) (0.2 3) (1.0 1) );
+            //levels ( (0.2 5) (0.5 4) (1.0 2) );
         }
     }
 
@@ -161,7 +162,13 @@ castellatedMeshControls
     // section reachable from the locationInMesh is kept.
     // NOTE: This point should never be on a face, always inside a cell, even
     // after refinement.
-    locationInMesh (-14 0 0);
+    //locationInMesh (-1.3 0 0.2);
+locationsInMesh
+(
+    ((-1.3 0 0.2) frontWheel)
+    ((-0.8 0 0.3) body)
+    ((0 0 0.2) backWheel)
+);
 
 
     // Whether any faceZones (as specified in the refinementSurfaces)

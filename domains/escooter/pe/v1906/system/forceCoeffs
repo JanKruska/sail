@@ -13,7 +13,7 @@ forceCoeffs1
     libs ( "libforces.so" );
 
     writeControl   timeStep;
-    timeInterval    1;
+    writeInterval    10;
 
     log         yes;
 

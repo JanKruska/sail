@@ -12,16 +12,16 @@ and
 presented at AIAA Aviation and Aeronautics Forum 2017.
 https://hal.inria.fr/hal-01518786/file/aiaa_sail.pdf
 
+Forked from [SAIL](https://github.com/alexander-hagg/sail)
 
-Three domains are provided with parameterized and feed forward deformation encodings: 2D airfoils, 3D velomobile shells and a 3D side view mirror based on the TUM DrivAer model. 
-https://www.aer.mw.tum.de/en/research-groups/automotive/drivaer/
+In addition to the three original domains, two new domains, 3D velomobile-wheelcase deformations, aswell as 3D-E-Scooter deformations, are included.
 
 To apply SAIL to a new domain only new representation and evaluation functions must be created. More sample domains will be made public as their are published. If you are interested in creating a new domain and having trouble, don't hesistate to ask!
 
 
 Produced using
 
-    Matlab R2017b
+    Matlab R2019b
 
 
 Required MATLAB Toolboxes:
@@ -34,34 +34,23 @@ Required MATLAB Toolboxes:
 Includes:
     GMPL  Version 4.1, Rasmussen & Nickisch (help gpml)
 
+    gpToolbox (https://github.com/alecjacobson/gptoolbox/)
+
 
 Required Software:
 
-	Airfoil domain:
+    Git LFS to resolve stl files as they are too large for normal git.
 
-         XFOIL low Rn airfoil design and analysis code 
-        
-        (raphael.mit.edu/xfoil/)
-        
-        
-    Velo domain:
-        
-        OpenFOAM computation fluid dynamics simulator (version 2.4.0)
-        
-        (https://openfoam.org/download/2-4-0-ubuntu/)
+	For Airfoil, Velo & Mirror domain see [SAIL](https://github.com/alexander-hagg/sail)
 
-    Mirror domain:
+    Wheelcase domain
+        OpenFOAM computation fluid dynamics simulator (v1906)
+        (https://www.openfoam.com/)
+
+        gpToolbox(included in modules, boolean mesh operations are mex functions and need to be compiled before they can be used, see [modules/gptoolbox/mex/README.md](modules/gptoolbox/mex/README.md) for information on how to compile the mex-files
+            and [modules/gptoolbox/README.md](modules/gptoolbox/README.md) and/or [gptoolbox](https://github.com/alecjacobson/gptoolbox/blob/master/README.md) for general information)
+
+    E-Scooter domain
+        OpenFOAM computation fluid dynamics simulator (v1906)
         
-        OpenFOAM computation fluid dynamics simulator (version 2.4.0)
-        
-        (https://openfoam.org/download/2-4-0-ubuntu/)        
-
-        STL files from DrivAer model 
-        	make sure to copy them into the oftemplates folder inside the mirror domain!)
-        	part_03_Estate.stl
-        	part_07_Mirror_Cover.stl
-			part_01_Body_Closed_2.stl
-			part_07_Mirror.stl
-
-
-        (https://www.aer.mw.tum.de/en/research-groups/automotive/drivaer/download/)
+        (https://www.openfoam.com/)        

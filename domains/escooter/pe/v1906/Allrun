@@ -15,7 +15,7 @@ source ~/OpenFOAM-plus/etc/bashrc
 
 #echo "Number of tasks: " 
 #echo $SLURM_NTASKS
-set -e #Exit if any command returns non-zero exit value
+#set -e #Exit if any command returns non-zero exit value
 
 start=`date +%s`
 
@@ -49,7 +49,7 @@ cfdEnd=`date +%s`
 echo "$((cfdEnd-cfdStart))" >> cfd.timing
 
 runApplication reconstructParMesh -constant
-runApplication reconstructPar -latestTime
+runApplication reconstructPar -time '200' #-time '50,100,150,200'
 
 # Return results
 cp postProcessing/forceCoeffs1/0/coefficient.dat result.dat

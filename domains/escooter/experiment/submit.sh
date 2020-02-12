@@ -1,4 +1,4 @@
-#!/bin/bash
+view#!/bin/bash
 #SBATCH --partition=hpc          # partition (queue)
 #SBATCH --nodes=1                # number of nodes
 #SBATCH --mem=160G               # memory per node in MB (different units with suffix K|M|G|T)
@@ -17,5 +17,24 @@ module load matlab/R2019b
 module load openmpi/gnu
 source ~/OpenFOAM-plus/etc/bashrc
 
+destFolderName="/scratch/jkrusk2s/sailCFD/"
+baseFolderName="/home/jkrusk2s/Code/sail/domains/escooter/pe/v1906/"
+nCases=10;
+startCase=200;
+
+for (( i=$startCase; i<$startCase+$nCases; i++ ))
+do
+	caseName=$destFolderName"case$i"
+	echo $caseName
+    rm -rf $caseName
+	cp -TR $baseFolderName $caseName
+	sbatch -D "$caseName" $caseName/submit.sh
+done 
+
 # Run experiment
-matlab -batch "escooter_runSail('nCases',5,'caseStart',200,'gens',11)"
+matlab -batch "escooter_runSail('nCases',$nCases,'caseStart',$startCase)"
+for (( i=$startCase; i<$startCase+$nCases; i++ ))
+do
+    caseName=$destFolderName"case$i"
+	touch caseName"/stop.signal"
+done 

@@ -15,19 +15,19 @@ parse.addOptional('nCases'  , 1);
 parse.addOptional('caseStart', 1);
 parse.addOptional('config','config1');
 
-parse.addOptional('gens',6);
-
 parse.parse(varargin{:});
 nCases   = parse.Results.nCases;
 config = parse.Results.config;
 caseStart = parse.Results.caseStart;
-gens = parse.Results.gens;
 
 id = getenv('SLURM_JOB_ID');
 
 disp([nCases caseStart]);
 
 %% Parallelization Settings
+if batchStartupOptionUsed
+    parpool;
+end
 %parpool(12);
 % Ensure Randomness of Randomness
 % RandStream.setGlobalStream(RandStream('mt19937ar','Seed','shuffle'));
@@ -47,13 +47,13 @@ nRuns = 1;
 for iRun = 1:nRuns
 
 %% Algorithm hyperparameters 
-	p = sail;               % loads default hyperparameters
+	 p = sail;               % loads default hyperparameters
 	 p.nInitialSamples   = 60;   
 	 p.nAdditionalSamples= 10;    
 	 p.nTotalSamples	 = 500;       
 	  
 	 p.nChildren         = 2^5;
-	 p.nGens             = 2^gens;
+	 p.nGens             = 2^11;
 	 
 	 p.display.illu      = false;  
 	 
@@ -73,10 +73,10 @@ d = escooter_Domain(...
 %% Run SAIL
 runTime = tic;
 disp('Running SAIL')
-rmCaseFolders(d);
-makeCaseFolders(d);
+% rmCaseFolders(d);
+% makeCaseFolders(d);
 output = sail(p,d);
-rmCaseFolders(d);
+% rmCaseFolders(d);
 disp(['Runtime: ' seconds2human(toc(runTime))]);
 
 %% Create New Prediction Map from produced surrogate
@@ -91,10 +91,10 @@ predMap = createPredictionMap(...
                
 save(['sail' int2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap');
 
-foundDesigns = reshape(predMap.genes,[p.data.predMapRes(1)*p.data.predMapRes(2),6]);
-trueFit = feval(d.preciseEvaluate,foundDesigns,d);
-
-save(['sail' int2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap','trueFit');
+% foundDesigns = reshape(predMap.genes,[p.data.predMapRes(1)*p.data.predMapRes(2),6]);
+% trueFit = feval(d.preciseEvaluate,foundDesigns,d);
+% 
+% save(['sail' int2str(id) '_' int2str(iRun) '.mat'],'output','p','d','predMap','trueFit');
 end
 
 %------------- END OF CODE --------------

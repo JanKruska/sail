@@ -1,8 +1,0 @@
-velo
-x min -1173.3727    max 1405.4937
-y min -371.9705     max 335.7066
-z min -24.2176      max 787.9304
-escooter
-x min -1508.9091    max 312.4403
-y min -174.2209     max 174.2209
-z min -11.6386      max 619.5709

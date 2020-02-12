@@ -12,5 +12,7 @@ rm -rf 0 > /dev/null 2>&1
 rm *.timing
 rm *.signal
 rm result.dat
+rm constant/triSurface/all_deformed.eMesh
+#rm constant/triSurface/all_deformed.stl
 
 cleanCase
