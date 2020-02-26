@@ -66,7 +66,7 @@ stlwrite(stlFileName, x);
 % end
 
 system(['touch ' openFoamFolder 'done.signal']);
-[err, out] = system(['(cd '   openFoamFolder '; ./Allclean)']);
+% [err, out] = system(['(cd '   openFoamFolder '; ./Allclean)']);
 if(err~=0)
    disp(['ERROR in Allclean' newline out]); 
 end

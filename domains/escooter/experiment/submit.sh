@@ -1,4 +1,4 @@
-view#!/bin/bash
+#!/bin/bash
 #SBATCH --partition=hpc          # partition (queue)
 #SBATCH --nodes=1                # number of nodes
 #SBATCH --mem=160G               # memory per node in MB (different units with suffix K|M|G|T)
@@ -36,5 +36,5 @@ matlab -batch "escooter_runSail('nCases',$nCases,'caseStart',$startCase)"
 for (( i=$startCase; i<$startCase+$nCases; i++ ))
 do
     caseName=$destFolderName"case$i"
-	touch caseName"/stop.signal"
+	touch "$caseName/stop.signal"
 done 

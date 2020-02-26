@@ -42,6 +42,7 @@ for iRound=0:nRounds-1
     obsIndices = 1+iRound*nCases:nCases+iRound*nCases;
     filledIndices = obsIndices(obsIndices<=nObs);
     value(filledIndices) = PEValue(1:length(filledIndices));
+    error('crash');
 end
 % nonConstraintIdxs = or(nextObservations(:,3) > -1.5, nextObservations(:,3) > -0.2);
 % value(nonConstraintIdxs) = value(nonConstraintIdxs) - 1;
