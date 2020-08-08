@@ -1,5 +1,5 @@
 # sail
-Source code for the Surrogate-Assisted Illumination (SAIL) algorithm, as
+Source code for my Bachelor's thesis on the integration of constraints into the Surrogate-Assisted Illumination (SAIL) algorithm,
 described in: 
 
 "Data-Efficient Exploration, Optimization, and Modeling of Diverse Designs
@@ -12,11 +12,9 @@ and
 presented at AIAA Aviation and Aeronautics Forum 2017.
 https://hal.inria.fr/hal-01518786/file/aiaa_sail.pdf
 
-Forked from [SAIL](https://github.com/alexander-hagg/sail)
+The original source code can be found in [SAIL](https://github.com/alexander-hagg/sail)
 
-In addition to the three original domains, two new domains, 3D velomobile-wheelcase deformations, aswell as 3D-E-Scooter deformations, are included.
-
-To apply SAIL to a new domain only new representation and evaluation functions must be created. More sample domains will be made public as their are published. If you are interested in creating a new domain and having trouble, don't hesistate to ask!
+In addition to the three original domains, two new domains, 3D velomobile-wheelcase deformations, aswell as 3D-E-Scooter deformations, were added.
 
 
 Produced using
@@ -34,23 +32,17 @@ Required MATLAB Toolboxes:
 Includes:
     GMPL  Version 4.1, Rasmussen & Nickisch (help gpml)
 
-    gpToolbox (https://github.com/alecjacobson/gptoolbox/)
+**Required Software:**
 
+**Git LFS** to resolve stl files as they are too large for normal git. Information on how to setup and resolve files using git lfs can be found [here](https://docs.github.com/en/github/managing-large-files/versioning-large-files)
 
-Required Software:
+**[gptoolbox](https://github.com/alecjacobson/gptoolbox/)** for geometry processing, located somewhere in the Matlab path
 
-    Git LFS to resolve stl files as they are too large for normal git.
+**Wheelcase domain:**
+* OpenFOAM computational fluid dynamics simulator (v1906)(https://www.openfoam.com/)
+* gpToolbox; The boolean mesh operations are mex functions and need to be compiled before they can be used, see [gptoolbox](https://github.com/alecjacobson/gptoolbox/blob/master/README.md) for information on how to compile them)
 
-	For Airfoil, Velo & Mirror domain see [SAIL](https://github.com/alexander-hagg/sail)
-
-    Wheelcase domain
-        OpenFOAM computation fluid dynamics simulator (v1906)
-        (https://www.openfoam.com/)
-
-        gpToolbox(included in modules, boolean mesh operations are mex functions and need to be compiled before they can be used, see [modules/gptoolbox/mex/README.md](modules/gptoolbox/mex/README.md) for information on how to compile the mex-files
-            and [modules/gptoolbox/README.md](modules/gptoolbox/README.md) and/or [gptoolbox](https://github.com/alecjacobson/gptoolbox/blob/master/README.md) for general information)
-
-    E-Scooter domain
-        OpenFOAM computation fluid dynamics simulator (v1906)
-        
-        (https://www.openfoam.com/)        
+**E-Scooter domain:**
+* OpenFOAM computational fluid dynamics simulator (v1906)(https://www.openfoam.com/)        
+	
+For further information on Airfoil, Velo & Mirror domain see [SAIL](https://github.com/alexander-hagg/sail)
