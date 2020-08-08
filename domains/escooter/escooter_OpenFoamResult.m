@@ -19,15 +19,7 @@ stlwrite(stlFileName, x);
 
 % Run SnappyHexMesh and OpenFOAM
 [~,~] = system(['touch ' openFoamFolder 'start.signal']);
-% [err, out] = system(['(cd '   openFoamFolder '; ./Allrun)']);
-% 
-% if(err~=0)
-%    disp(['ERROR in Allrun' newline out]);
-%    errorFolder = ['error' int2str(randi(100,1)) '/'];
-%    system(['mkdir ' openFoamFolder errorFolder])
-%    save([openFoamFolder errorFolder 'error.mat']);
-%    system(['mv ' openFoamFolder 'log* ' openFoamFolder errorFolder]);
-% else
+
 	% Wait for results
 	resultOutputFile = [openFoamFolder 'result.dat'];
 	tic;
@@ -66,8 +58,4 @@ stlwrite(stlFileName, x);
 % end
 
 system(['touch ' openFoamFolder 'done.signal']);
-% [err, out] = system(['(cd '   openFoamFolder '; ./Allclean)']);
-if(err~=0)
-   disp(['ERROR in Allclean' newline out]); 
-end
     

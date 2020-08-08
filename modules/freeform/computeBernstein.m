@@ -1,9 +1,8 @@
 function [ffdP] = computeBernstein(ffdP)
-%COMPUTEBERNSTEIN Summary of this function goes here
-%   Detailed explanation goes here
+%computeBernstein compute Bernstein polynomials for Free-Form Deformation
+% These won't change if we keep deforming the same shape, so we can
+% save the results and skip all the computation in later runs.
 %% Compute Bernstein polynomials
-    % These won't change if we keep deforming the same shape, so we can
-    % save the results and skip all the computation in later runs.
     nDimX = ffdP.nDimX;
     nDimY = ffdP.nDimY;
     nDimZ = ffdP.nDimZ;

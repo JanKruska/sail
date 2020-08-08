@@ -45,15 +45,17 @@ d.loadInitialSamples = false;
 d.initialSampleSource= '';
 
 if(constraint)
-   d.createAcqFunction = 'wheelcase_CreateAcqFuncConstraint';
-   [d.steeringSpace.vertices,d.steeringSpace.faces] = readSTL('domains/wheelcase/ffd/turning_volume.stl','JoinCorners',true);
-   d.constraintVolumeBase = 1.6E6;
+   d.conCoef = 1;  % constraint weight
    d.extraMapValues = {'cD','confidence','constraint'};
 else
-   d.createAcqFunction = 'wheelcase_CreateAcqFunc';      %
+   d.conCoef = 0;  % constraint weight
    d.extraMapValues = {'cD','confidence'};
 end
 
+d.createAcqFunction = 'wheelcase_CreateAcqFuncConstraint';
+[d.steeringSpace.vertices,d.steeringSpace.faces] = readSTL('domains/wheelcase/ffd/turning_volume.stl','JoinCorners',true);
+d.constraintVolumeBase = 1.6E6; %Volume of difference between undeformed 
+                                %wheelcase and the space needed for steering is about 1.6L
 
 [stl.vertices,stl.faces] = readSTL('domains/wheelcase/ffd/combined_180.stl','JoinCorners',true);
 ffdPLeft = makeFfdParameters(stl,['domains/wheelcase/configs/' d.config '/ffd_config_left.prm']);
@@ -74,7 +76,6 @@ d.featureRes = [25 25];
 d.nDims      = length(d.featureRes);
 d.featureMin = [300 -600];
 d.featureMax = [450 200];
-% d.featureLabels = {'velo width', 'velo height'}; % {X label, Y label}
 d.featureLabels = {'velo width', 'X-Pos of widest point'}; % {X label, Y label}
 
 % - GP Models
@@ -85,7 +86,7 @@ d.nVals = 2; % number of values of interest
 % Acquisition function
 d.varCoef = 2;  % variance weight
 d.muCoef  = 1;  % mean weight 
-d.conCoef = 1;  % constraint weight
+
 
 d.invalidPenalties = [];
 

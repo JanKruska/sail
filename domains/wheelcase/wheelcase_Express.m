@@ -16,7 +16,7 @@ deformsRight = createDeforms(deformVals,ffdPRight,'right');
 leftShifts = performffd(ffdPLeft,deformsLeft);
 rightShifts = performffd(ffdPRight,deformsRight);
 
-%Apply ffd shifts to all Points inside the ffd box
+%Apply ffd shifts to all points inside the ffd box
 for i = 1:nDeforms
     FV(i).vertices = ffdPLeft.meshPoints;
     FV(i).vertices(ffdPLeft.validIdxs,:) = FV(i).vertices(ffdPLeft.validIdxs,:)...

@@ -1,8 +1,15 @@
 function wheelcase_runSail(varargin)
-% Runs SAIL velomobile optimization on cluster - [RUN THROUGH QSUB]
+% Runs SAIL velomobile optimization on cluster - [RUN THROUGH sbatch]
 %
-% Syntax:  [output1,output2] = function_name(input1,input2,input3)
-%
+% Possible arguments
+% nCases        - number of parallel cases
+% caseStart     - starting number of first case to avoid overlap between
+%                  multiple instances of this program overwriting each
+%                  others cases
+% config        - which configuration to use; Configurations are stored in
+%                  the "configs" directory
+% constraint    - enables/disables the use of the constraint
+% gens          - log2 of number of generations used for MAP-Elites
 
 % Author: Jan Kruska
 
@@ -12,7 +19,7 @@ parse.addOptional('nCases'  , 1);
 parse.addOptional('caseStart', 1);
 parse.addOptional('config','config1');
 parse.addOptional('constraint', false);
-parse.addOptional('gens',6);
+parse.addOptional('gens',11);
 
 parse.parse(varargin{:});
 nCases   = parse.Results.nCases;
